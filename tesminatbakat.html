@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌿 Temani Tumbuh - Tes Minat dan Bakat Anak</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+      font-size: 1.8rem;
+    }
+    header {
+      background-color: #e3f6f5;
+      padding: 6rem 3rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 4.5rem;
+    }
+    header p {
+      font-size: 2.4rem;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+    }
+    .container {
+      padding: 6rem 3rem;
+      max-width: 1600px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    .btn-submit {
+      margin-top: 3rem;
+      width: 100%;
+      padding: 2rem;
+      font-size: 2rem;
+      background-color: #38b6ff;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-submit:hover {
+      background-color: #2597d5;
+    }
+    #result {
+      margin-top: 4rem;
+      padding: 4rem;
+      background: #e6f7ff;
+      border-left: 10px solid #38b6ff;
+      border-radius: 24px;
+      font-size: 2rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer {
+      margin-top: 4rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.8rem;
+      color: #666;
+    }
+    .premium-link {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .premium-link a {
+      display: inline-block;
+      background-color: #ffc107;
+      padding: 1.5rem 3rem;
+      border-radius: 16px;
+      color: #333;
+      font-size: 2rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .premium-link a:hover {
+      background-color: #e0a800;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌿 Temani Tumbuh - Tes Minat dan Bakat Anak</h1>
+    <p>Pilih pernyataan yang menggambarkan minat dan kemampuan anak Anda. Minat menunjukkan ketertarikan, sedangkan kemampuan menunjukkan potensi alami yang mulai tampak.</p>
+  </header>
+
+  <div class="container">
+    <form id="quizForm">
+      <h3>Minat Anak</h3>
+      <label><input type="checkbox" name="minat" value="musik"> Anak senang mendengarkan musik, menyanyi, atau bereaksi terhadap lagu.</label>
+      <label><input type="checkbox" name="minat" value="logika"> Anak tertarik pada puzzle, teka-teki, atau permainan berpikir.</label>
+      <label><input type="checkbox" name="minat" value="bahasa"> Anak suka mendengarkan cerita, membaca buku, atau bercerita.</label>
+      <label><input type="checkbox" name="minat" value="gerak"> Anak sangat aktif dan senang aktivitas fisik seperti menari atau berlari.</label>
+      <label><input type="checkbox" name="minat" value="gambar"> Anak suka mencoret-coret, menggambar, atau melihat karya seni.</label>
+      <label><input type="checkbox" name="minat" value="sosial"> Anak senang bermain bersama teman dan menunjukkan empati.</label>
+
+      <h3>Kemampuan Anak</h3>
+      <label><input type="checkbox" name="bakat" value="musik"> Anak dapat mengikuti irama, meniru nada, atau memainkan alat musik sederhana.</label>
+      <label><input type="checkbox" name="bakat" value="logika"> Anak mampu menyelesaikan masalah logika atau menyusun benda secara sistematis.</label>
+      <label><input type="checkbox" name="bakat" value="bahasa"> Anak bisa menyusun kalimat dengan baik atau menirukan kata-kata kompleks.</label>
+      <label><input type="checkbox" name="bakat" value="gerak"> Anak terkoordinasi dengan baik saat bergerak atau dalam olahraga kecil.</label>
+      <label><input type="checkbox" name="bakat" value="gambar"> Anak dapat membuat gambar yang bermakna atau menciptakan bentuk tertentu.</label>
+      <label><input type="checkbox" name="bakat" value="sosial"> Anak mampu memimpin permainan atau memahami perasaan orang lain.</label>
+
+      <button type="button" class="btn-submit" onclick="lihatHasil()">Lihat Hasil</button>
+    </form>
+
+    <div id="result"></div>
+
+    <div class="footer">
+      💬 Semua tes kami gratis dan bisa langsung diisi. Tapi kalau kamu ingin temani tumbuh anak setiap hari — kami siap bantu.
+    </div>
+
+    <div class="premium-link">
+      <a href="/premium.html" target="_blank">🔓 Coba Versi Premium</a>
+    </div>
+  </div>
+
+  <script>
+    function lihatHasil() {
+      const minat = Array.from(document.querySelectorAll('input[name="minat"]:checked')).map(cb => cb.value);
+      const bakat = Array.from(document.querySelectorAll('input[name="bakat"]:checked')).map(cb => cb.value);
+
+      const domain = ['musik', 'logika', 'bahasa', 'gerak', 'gambar', 'sosial'];
+
+      let hasil = '<h3>Hasil Observasi Minat dan Bakat Anak:</h3>';
+
+      domain.forEach(k => {
+        const punyaMinat = minat.includes(k);
+        const punyaBakat = bakat.includes(k);
+
+        if (punyaMinat && punyaBakat) {
+          hasil += `<p>✅ Anak menunjukkan <strong>minat</strong> dan <strong>kemampuan</strong> dalam bidang <strong>${formatLabel(k)}</strong>. Ini bisa menjadi potensi kuat yang layak diasah lebih lanjut.</p>`;
+        } else if (punyaMinat) {
+          hasil += `<p>⭐ Anak tertarik pada bidang <strong>${formatLabel(k)}</strong>. Dorong eksplorasi lebih lanjut untuk melihat potensinya berkembang.</p>`;
+        } else if (punyaBakat) {
+          hasil += `<p>💡 Anak tampak memiliki kemampuan dalam <strong>${formatLabel(k)}</strong>, meski belum menunjukkan ketertarikan besar. Bisa jadi bakat alami yang belum disadari.</p>`;
+        }
+      });
+
+      hasil += `<p><em>Catatan:</em> Minat bisa berkembang menjadi bakat jika diasah dengan lingkungan yang tepat. Sebaliknya, bakat yang belum disukai bisa muncul setelah anak merasa nyaman atau percaya diri.</p>`;
+
+      document.getElementById("result").innerHTML = hasil;
+    }
+
+    function formatLabel(val) {
+      switch(val) {
+        case 'musik': return 'Musikal';
+        case 'logika': return 'Logika-Matematis';
+        case 'bahasa': return 'Bahasa & Literasi';
+        case 'gerak': return 'Gerak & Kinestetik';
+        case 'gambar': return 'Visual-Spasial';
+        case 'sosial': return 'Sosial & Emosional';
+        default: return val;
+      }
+    }
+  </script>
+</body>
+</html>
